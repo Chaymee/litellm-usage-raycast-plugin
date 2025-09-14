@@ -1,0 +1,61 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "litellm-usage-tracker",
+  "title": "Litellm Usage Tracker",
+  "description": "Monitor and visualize your LiteLLM token usage and spending",
+  "icon": "command-icon.png",
+  "author": "chaymee",
+  "categories": [
+    "Developer Tools",
+    "Productivity"
+  ],
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "usage-dashboard",
+      "title": "View Usage Dashboard",
+      "description": "Monitor your LiteLLM token usage and spending metrics",
+      "mode": "view"
+    }
+  ],
+  "preferences": [
+    {
+      "name": "litellmApiKey",
+      "type": "password",
+      "required": true,
+      "title": "LiteLLM API Key",
+      "description": "Your LiteLLM API key for accessing usage statistics",
+      "placeholder": "Enter your LiteLLM API key"
+    },
+    {
+      "name": "litellmEndpoint",
+      "type": "textfield",
+      "required": true,
+      "title": "LiteLLM Endpoint",
+      "description": "Your LiteLLM server endpoint URL (e.g., https://example.litellm.com)",
+      "default": "https://example.litellm.com",
+      "placeholder": "https://your-server.litellm.com"
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^1.63.1",
+    "@raycast/utils": "^1.10.1",
+    "node-fetch": "^2.6.7"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "1.0.6",
+    "@types/node": "18.8.3",
+    "@types/node-fetch": "^2.6.4",
+    "@types/react": "18.0.9",
+    "eslint": "^8.51.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.2.2"
+  },
+  "scripts": {
+    "build": "ray build -e dist",
+    "dev": "ray develop",
+    "fix-lint": "ray lint --fix",
+    "lint": "ray lint",
+    "publish": "npx @raycast/api@latest publish"
+  }
+}
