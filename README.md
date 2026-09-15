@@ -78,3 +78,52 @@ npm run dev
 # Build for distribution
 npm run build
 ```
+
+## Future Enhancements
+
+### Enhanced API Integration
+
+The current implementation uses the basic `/key/info` endpoint, but LiteLLM provides more comprehensive cost tracking endpoints that could significantly improve the extension:
+
+#### Improved Endpoints to Implement:
+
+1. **`/user/info`** - More accurate current spend data
+   - Better alternative to `/key/info` for spend tracking
+   - Returns user-specific spending totals
+
+2. **`/user/daily/activity`** - Historical usage analytics
+   - **Parameters**: `start_date`, `end_date`
+   - **Returns**: Daily breakdowns with:
+     - `total_spend` per day
+     - `total_tokens` per day
+     - `total_requests` per day
+     - Spend breakdown by models and providers
+   - **Benefits**: Real server-side data instead of local calculations
+
+3. **`/global/spend/report`** - Team/organization analytics
+   - Group spending by team, customer, or API key
+   - Useful for multi-user dashboard views
+
+4. **`/spend/logs`** - Detailed transaction logs
+   - Individual request-level spending data
+   - `summarize` parameter for aggregated vs detailed views
+   - Perfect for detailed usage analysis
+
+#### Enhanced Features Possible:
+
+- **Rich Metrics**: Token counts, request counts, not just spending
+- **Accurate Historical Data**: 30-day server-side rolling window
+- **Model/Provider Breakdowns**: See which models cost the most
+- **Real-time Analytics**: Server-calculated daily/weekly/monthly totals
+- **Cost Per Token Analysis**: Efficiency metrics across different models
+- **Advanced Graphing**: More sophisticated usage trend visualizations
+
+#### Implementation Notes:
+
+- Replace local spend calculations with server-side analytics
+- Maintain backward compatibility with current `/key/info` for budget data
+- Add new interface types for enhanced API responses
+- Improve graphing with token and request metrics
+- Consider using proper charting libraries (react-vis, chart.js) for better visualizations
+
+These improvements would transform the extension from basic spend tracking to comprehensive LiteLLM usage analytics.
