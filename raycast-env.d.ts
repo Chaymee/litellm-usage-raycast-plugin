@@ -20,10 +20,14 @@ declare type Preferences = ExtensionPreferences
 declare namespace Preferences {
   /** Preferences accessible in the `usage-dashboard` command */
   export type UsageDashboard = ExtensionPreferences & {}
+  /** Preferences accessible in the `models` command */
+  export type Models = ExtensionPreferences & {}
 }
 
 declare namespace Arguments {
   /** Arguments passed to the `usage-dashboard` command */
   export type UsageDashboard = {}
+  /** Arguments passed to the `models` command */
+  export type Models = {}
 }
 

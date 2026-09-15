@@ -20,6 +20,32 @@ export interface KeyInfoResponse {
   permissions?: string[];
 }
 
+export interface ModelInfo {
+  model_name: string;
+  litellm_params?: {
+    model?: string;
+    [key: string]: unknown;
+  };
+  model_info?: {
+    id?: string;
+    mode?: string;
+    input_cost_per_token?: number;
+    output_cost_per_token?: number;
+    max_tokens?: number;
+    max_input_tokens?: number;
+    max_output_tokens?: number;
+    supports_vision?: boolean;
+    supports_function_calling?: boolean;
+    supports_parallel_function_calling?: boolean;
+    supports_response_schema?: boolean;
+    [key: string]: unknown;
+  };
+}
+
+export interface ModelInfoResponse {
+  data: ModelInfo[];
+}
+
 export class LiteLLMClient {
   private apiKey: string;
   private endpoint: string;
@@ -51,6 +77,29 @@ export class LiteLLMClient {
   async getCurrentSpend(): Promise<number> {
     const keyInfo = await this.getKeyInfo();
     return keyInfo.info.spend || 0;
+  }
+
+  async getModelInfo(): Promise<ModelInfoResponse> {
+    const url = `${this.endpoint}/v1/model/info`;
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${this.apiKey}`,
+        "x-litellm-api-key": this.apiKey,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch model info: ${response.status} ${response.statusText}`);
+    }
+
+    return response.json() as Promise<ModelInfoResponse>;
+  }
+
+  getOpenAiBaseUrl(): string {
+    return `${this.endpoint}/v1`;
   }
 }
 
